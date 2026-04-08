@@ -29,7 +29,7 @@ That's it. Korext scans your code on every push and PR using the default `web` p
 
 ## How It Works
 
-1. **Install** -- The action installs the [Korext CLI](https://www.npmjs.com/package/korext) (`v0.9.4`)
+1. **Install** -- The action installs the [Korext CLI](https://www.npmjs.com/package/korext) (`v0.9.5`)
 2. **Scan** -- Runs `korext enforce` against your codebase with the selected policy pack
 3. **Report** -- Generates a SARIF file and uploads it to GitHub Code Scanning
 4. **Gate** -- Fails the workflow if critical or high severity violations are found
