@@ -181,6 +181,7 @@ The scanner automatically skips `node_modules`, `.git`, `dist`, `build`, and `.n
 - [Korext Platform](https://app.korext.com)
 - [Korext CLI on npm](https://www.npmjs.com/package/korext)
 - [Korext Website](https://www.korext.com)
+- [Korext Docs] (https://www.korext.com/docs)
 
 ## License
 
