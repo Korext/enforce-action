@@ -43,7 +43,7 @@ runs:
       shell: bash
       run: |
         echo "::group::Installing Korext CLI"
-        npm install -g korext@0.9.4 || {
+              npm install -g korext@0.9.5 || {
           echo "::error::Failed to install Korext CLI. Check that npm is available."
           exit 1
         }
