@@ -116,48 +116,16 @@ runs:
         fi
 
         # Extract violation count from SARIF
-        VIOLATION_COUNT=$(python3 -c "
-        import json, sys
-        try:
-            sarif = json.load(open('${SARIF_FILE}'))
-            print(len(sarif.get('runs', [{}])[0].get('results', [])))
-        except:
-            print('0')
-        " 2>/dev/null || echo "0")
+        VIOLATION_COUNT=$(python3 -c "import json; sarif=json.load(open('${SARIF_FILE}')); print(len(sarif.get('runs',[{}])[0].get('results',[])))" 2>/dev/null || echo "0")
 
         echo "violations=${VIOLATION_COUNT}" >> "$GITHUB_OUTPUT"
         echo "sarif-file=${SARIF_FILE}" >> "$GITHUB_OUTPUT"
         echo "enforce-exit=${ENFORCE_EXIT}" >> "$GITHUB_OUTPUT"
 
         # Extract proof bundle info from SARIF properties
-        BUNDLE_COUNT=$(python3 -c "
-import json, sys
-try:
-    sarif = json.load(open('${SARIF_FILE}'))
-    props = sarif.get('runs', [{}])[0].get('properties', {})
-    print(props.get('korext:bundleCount', 0))
-except:
-    print('0')
-" 2>/dev/null || echo "0")
-        BUNDLES_SIGNED=$(python3 -c "
-import json, sys
-try:
-    sarif = json.load(open('${SARIF_FILE}'))
-    props = sarif.get('runs', [{}])[0].get('properties', {})
-    print(props.get('korext:bundlesSigned', 0))
-except:
-    print('0')
-" 2>/dev/null || echo "0")
-        BUNDLE_IDS=$(python3 -c "
-import json, sys
-try:
-    sarif = json.load(open('${SARIF_FILE}'))
-    props = sarif.get('runs', [{}])[0].get('properties', {})
-    ids = props.get('korext:bundleIds', [])
-    print(','.join(ids))
-except:
-    print('')
-" 2>/dev/null || echo "")
+        BUNDLE_COUNT=$(python3 -c "import json; sarif=json.load(open('${SARIF_FILE}')); print(sarif.get('runs',[{}])[0].get('properties',{}).get('korext:bundleCount',0))" 2>/dev/null || echo "0")
+        BUNDLES_SIGNED=$(python3 -c "import json; sarif=json.load(open('${SARIF_FILE}')); print(sarif.get('runs',[{}])[0].get('properties',{}).get('korext:bundlesSigned',0))" 2>/dev/null || echo "0")
+        BUNDLE_IDS=$(python3 -c "import json; sarif=json.load(open('${SARIF_FILE}')); ids=sarif.get('runs',[{}])[0].get('properties',{}).get('korext:bundleIds',[]); print(','.join(ids))" 2>/dev/null || echo "")
 
         echo "bundle-count=${BUNDLE_COUNT}" >> "$GITHUB_OUTPUT"
         echo "bundles-signed=${BUNDLES_SIGNED}" >> "$GITHUB_OUTPUT"
