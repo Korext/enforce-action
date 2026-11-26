@@ -1,5 +1,5 @@
 name: 'Korext Enforce'
-description: 'Enforce security, compliance, and quality standards on AI generated code. 72 policy packs. Cryptographically signed proof bundles. Data sovereignty with regional processing.'
+description: 'Scan pull requests for security, compliance and quality violations in AI generated code. 72 policy packs, 13 languages.'
 author: 'Korext'
 
 branding:
